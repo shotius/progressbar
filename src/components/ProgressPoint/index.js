@@ -1,1 +1,1 @@
-export { default } from './ProgressPoint.component';
+export { default } from './ProgressPoint.container';
