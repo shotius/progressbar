@@ -1,44 +1,9 @@
-import { Component, Fragment, PureComponent } from 'react';
-import { makeRange } from 'src/utils/helpers';
-import './MultistepProgressBar.style';
 import PropTypes from 'prop-types';
+import { Component, Fragment } from 'react';
 import DoneIconsComponent from '../Icons/DoneIcons.component';
-import classNames from 'classnames';
-
-class ProgressLine extends PureComponent {
-  static propTypes = {
-    phase: PropTypes.oneOf(['done', 'doing', 'not done']),
-  };
-
-  render() {
-    const cn = classNames('progress-bar__line', {
-      'progress-bar__line--done': this.props.phase === 'done',
-      'fill-in-animation progress-bar__line--done':
-        this.props.phase === 'doing',
-    });
-    return <div className={cn}></div>;
-  }
-}
-
-class ProgressPoint extends PureComponent {
-  static propTypes = {
-    done: PropTypes.bool,
-    label: PropTypes.string,
-  };
-
-  render() {
-    const cn = classNames('progress-bar__point', {
-      'progress-bar__point--done': this.props.done,
-    });
-
-    return (
-      <div className={cn}>
-        {this.props.children}
-        <div>{this.props.label}</div>
-      </div>
-    );
-  }
-}
+import ProgressLine from '../ProgressLine';
+import ProgressPoint from "../ProgressPoint"
+import './MultistepProgressBar.style';
 
 class MultistepProgressBar extends Component {
   renderCurrentStep(step, label) {
