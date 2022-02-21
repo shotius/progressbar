@@ -1,35 +1,71 @@
-import { Component, Fragment } from 'react';
+import { Component, Fragment, PureComponent } from 'react';
 import { makeRange } from 'src/utils/helpers';
 import './MultistepProgressBar.style';
 import PropTypes from 'prop-types';
 import DoneIconsComponent from '../Icons/DoneIcons.component';
+import classNames from 'classnames';
+
+class ProgressLine extends PureComponent {
+  static propTypes = {
+    done: PropTypes.bool,
+  };
+
+  render() {
+    const cn = classNames('progress-bar__line', {
+      'progress-bar__line--done': this.props.done,
+    });
+    return <div className={cn}></div>;
+  }
+}
+
+class ProgressPoint extends PureComponent {
+  static propTypes = {
+    done: PropTypes.bool,
+    label: PropTypes.string,
+  };
+
+  render() {
+    const cn = classNames('progress-bar__point', {
+      'progress-bar__point--done': this.props.done,
+    });
+    return (
+      <div className={cn}>
+        {this.props.children}
+        <div>{this.props.label}</div>
+      </div>
+    );
+  }
+}
 
 class MultistepProgressBar extends Component {
-  renderCurrentStep(step) {
-    console.log('current step');
+  renderCurrentStep(step, label) {
     return (
       <>
-        <div className="progress-bar__line progress-bar--done"></div>
-        <div className="progress-bar__point progress-bar--done">{step}</div>
+        <ProgressLine done={true} />
+        <ProgressPoint done={true} label={label}>
+          {step}
+        </ProgressPoint>
       </>
     );
   }
-  renderNotDonwStep(step) {
+  renderNotDonwStep(step, label) {
     return (
       <>
-        <div className="progress-bar__line"></div>
-        <div className="progress-bar__point">{step}</div>
+        <ProgressLine done={false} />
+        <ProgressPoint done={false} label={label}>
+          {step}
+        </ProgressPoint>
       </>
     );
   }
 
-  renderDoneStep() {
+  renderDoneStep(label) {
     return (
       <>
-        <div className="progress-bar__line progress-bar--done"></div>
-        <div className="progress-bar__point progress-bar--done">
+        <ProgressLine done={true} />
+        <ProgressPoint done={true} label={label}>
           <DoneIconsComponent />
-        </div>
+        </ProgressPoint>
       </>
     );
   }
@@ -39,15 +75,14 @@ class MultistepProgressBar extends Component {
 
     return (
       <div className="progress-bar">
-        {makeRange({ end: steps }).map((_, i) => {
-          const step = i;
+        {steps.map((step, i) => {
           return (
-            <Fragment key={i}>
-              {stepsDone > step
-                ? this.renderDoneStep()
-                : stepsDone === step
-                ? this.renderCurrentStep(step + 1)
-                : this.renderNotDonwStep(step + 1)}
+            <Fragment key={step}>
+              {stepsDone > i
+                ? this.renderDoneStep(step)
+                : stepsDone === i
+                ? this.renderCurrentStep(i + 1, step)
+                : this.renderNotDonwStep(i + 1)}
             </Fragment>
           );
         })}

@@ -8,6 +8,7 @@
         "@scandipwa/scandipwa-scripts": "2.4.19",
         "@tilework/mosaic": "0.1.4",
         "@tilework/mosaic-craco": "0.0.5",
+        "classnames": "^2.3.1",
         "postcss": "8.4.5"
     },
     "scandipwa": {
@@ -36,7 +37,9 @@
     },
     "eslintConfig": {
         "extends": "@scandipwa",
-        "ignorePatterns": ["src/**"]
+        "ignorePatterns": [
+            "src/**"
+        ]
     },
     "proxy": "https://demo100-ors-1588667385-swpwa451-zco.scandipwa.cloud/"
 }

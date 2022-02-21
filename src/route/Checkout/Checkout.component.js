@@ -3,11 +3,13 @@ import { ContentWrapper } from 'SourceComponent/ContentWrapper/ContentWrapper.co
 import './Checkout.extension.style';
 import MultistepProgressBar from 'src/components/MultistepProgressBar/MultistepProgressBar.component';
 
+const steps = ['shipping', 'Review & Payment', "", "", ""];
+
 class Checkout extends SourceCheckout {
   render() {
     return (
       <main block="Checkout">
-        <MultistepProgressBar steps={3} stepsDone={1} />
+        <MultistepProgressBar steps={steps} stepsDone={1} />
         <ContentWrapper
           wrapperMix={{ block: 'Checkout', elem: 'Wrapper' }}
           label={__('Checkout page')}
