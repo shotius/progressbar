@@ -7,13 +7,20 @@ import classNames from 'classnames';
 
 class ProgressLine extends PureComponent {
   static propTypes = {
-    done: PropTypes.bool,
+    phase: PropTypes.oneOf(['done', 'doing', 'not done']),
   };
 
   render() {
-    const cn = classNames('progress-bar__line', {
-      'progress-bar__line--done': this.props.done,
-    });
+    console.log('props: ', this.props);
+    const cn = classNames(
+      'progress-bar__line',
+      {
+        'progress-bar__line--done': this.props.phase === 'done',
+        'fill-in-animation progress-bar__line--done':
+          this.props.phase === 'doing',
+      },
+      this.props.className
+    );
     return <div className={cn}></div>;
   }
 }
@@ -25,9 +32,13 @@ class ProgressPoint extends PureComponent {
   };
 
   render() {
-    const cn = classNames('progress-bar__point', {
-      'progress-bar__point--done': this.props.done,
-    });
+    const cn = classNames(
+      'progress-bar__point',
+      {
+        'progress-bar__point--done': this.props.done,
+      },
+      this.props.className
+    );
     return (
       <div className={cn}>
         {this.props.children}
@@ -41,7 +52,7 @@ class MultistepProgressBar extends Component {
   renderCurrentStep(step, label) {
     return (
       <>
-        <ProgressLine done={true} />
+        <ProgressLine done={true} phase="doing" />
         <ProgressPoint done={true} label={label}>
           {step}
         </ProgressPoint>
@@ -51,7 +62,7 @@ class MultistepProgressBar extends Component {
   renderNotDonwStep(step, label) {
     return (
       <>
-        <ProgressLine done={false} />
+        <ProgressLine phase={"not done"} />
         <ProgressPoint done={false} label={label}>
           {step}
         </ProgressPoint>
@@ -62,7 +73,7 @@ class MultistepProgressBar extends Component {
   renderDoneStep(label) {
     return (
       <>
-        <ProgressLine done={true} />
+        <ProgressLine phase={"done"} />
         <ProgressPoint done={true} label={label}>
           <DoneIconsComponent />
         </ProgressPoint>

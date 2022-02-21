@@ -11,6 +11,9 @@
     var(--progress-bar-background) 50%
   );
   background-size: 200%;
+}
+
+.fill-in-animation {
   animation: fillLeftToRight 0.5s ease-out;
 }
 

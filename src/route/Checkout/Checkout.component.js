@@ -9,7 +9,7 @@ class Checkout extends SourceCheckout {
   render() {
     return (
       <main block="Checkout">
-        <MultistepProgressBar steps={steps} stepsDone={1} />
+        <MultistepProgressBar steps={steps} stepsDone={2} />
         <ContentWrapper
           wrapperMix={{ block: 'Checkout', elem: 'Wrapper' }}
           label={__('Checkout page')}
