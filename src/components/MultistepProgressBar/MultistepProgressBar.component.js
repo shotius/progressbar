@@ -11,16 +11,11 @@ class ProgressLine extends PureComponent {
   };
 
   render() {
-    console.log('props: ', this.props);
-    const cn = classNames(
-      'progress-bar__line',
-      {
-        'progress-bar__line--done': this.props.phase === 'done',
-        'fill-in-animation progress-bar__line--done':
-          this.props.phase === 'doing',
-      },
-      this.props.className
-    );
+    const cn = classNames('progress-bar__line', {
+      'progress-bar__line--done': this.props.phase === 'done',
+      'fill-in-animation progress-bar__line--done':
+        this.props.phase === 'doing',
+    });
     return <div className={cn}></div>;
   }
 }
@@ -32,13 +27,10 @@ class ProgressPoint extends PureComponent {
   };
 
   render() {
-    const cn = classNames(
-      'progress-bar__point',
-      {
-        'progress-bar__point--done': this.props.done,
-      },
-      this.props.className
-    );
+    const cn = classNames('progress-bar__point', {
+      'progress-bar__point--done': this.props.done,
+    });
+
     return (
       <div className={cn}>
         {this.props.children}
@@ -62,7 +54,7 @@ class MultistepProgressBar extends Component {
   renderNotDonwStep(step, label) {
     return (
       <>
-        <ProgressLine phase={"not done"} />
+        <ProgressLine phase={'not done'} />
         <ProgressPoint done={false} label={label}>
           {step}
         </ProgressPoint>
@@ -73,7 +65,7 @@ class MultistepProgressBar extends Component {
   renderDoneStep(label) {
     return (
       <>
-        <ProgressLine phase={"done"} />
+        <ProgressLine phase={'done'} />
         <ProgressPoint done={true} label={label}>
           <DoneIconsComponent />
         </ProgressPoint>
@@ -83,17 +75,18 @@ class MultistepProgressBar extends Component {
 
   render() {
     const { steps, stepsDone } = this.props;
+    const stepsToProceed = steps.concat(''); // since we hide the last point
 
     return (
       <div className="progress-bar">
-        {steps.map((step, i) => {
+        {stepsToProceed.map((step, i) => {
           return (
             <Fragment key={step}>
               {stepsDone > i
                 ? this.renderDoneStep(step)
                 : stepsDone === i
                 ? this.renderCurrentStep(i + 1, step)
-                : this.renderNotDonwStep(i + 1)}
+                : this.renderNotDonwStep(i + 1, step)}
             </Fragment>
           );
         })}

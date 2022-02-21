@@ -4,22 +4,19 @@
   --progress-bar-active-background: var(--primary-base-color);
 }
 
-@mixin fillIfDone {
+@mixin doneStep {
   background: linear-gradient(
     to right,
     var(--progress-bar-active-background) 50%,
     var(--progress-bar-background) 50%
   );
   background-size: 200%;
-}
-
-.fill-in-animation {
-  animation: fillLeftToRight 0.5s ease-out;
+  color: var(--secondary-success-color)
 }
 
 .progress-bar {
   background: var(--secondary-base-color);
-  padding: 20px 0px;
+  padding: 20px 0px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +26,7 @@
     flex: 1;
     background-color: var(--progress-bar-background);
     &--done {
-      @include fillIfDone;
+      @include doneStep;
     }
     &:first-child,
     &:last-child {
@@ -52,9 +49,9 @@
       display: none;
     }
     &--done {
-      @include fillIfDone;
-      color: var(--secondary-success-color);
+      @include doneStep;
     }
+    // label
     div {
       position: absolute;
       bottom: -20px;
@@ -62,6 +59,11 @@
       white-space: nowrap;
     }
   }
+}
+
+// animation class 
+.fill-in-animation {
+  animation: fillLeftToRight 0.5s ease-out;
 }
 
 @keyframes fillLeftToRight {
