@@ -1,7 +1,7 @@
 import { Checkout as SourceCheckout } from 'SourceRoute/Checkout/Checkout.component';
 import { ContentWrapper } from 'SourceComponent/ContentWrapper/ContentWrapper.component';
 import './Checkout.extension.style';
-import MultistepProgressBar from 'src/components/MultistepProgressBar/MultistepProgressBar.component';
+import MultistepProgressBar from 'src/components/MultistepProgressBar';
 
 const steps = ['shipping', 'Review & Payment'];
 

@@ -1,1 +1,1 @@
-export {default} from './ProgressLine.component'
+export {default} from './ProgressLine.container'

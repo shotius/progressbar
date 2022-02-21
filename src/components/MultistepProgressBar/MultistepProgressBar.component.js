@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Component, Fragment } from 'react';
 import DoneIconsComponent from '../Icons/DoneIcons.component';
 import ProgressLine from '../ProgressLine';
@@ -59,10 +58,5 @@ class MultistepProgressBar extends Component {
     );
   }
 }
-
-MultistepProgressBar.propTypes = {
-  steps: PropTypes.number.isRequired,
-  stepsDone: PropTypes.number.isRequired,
-};
 
 export default MultistepProgressBar;
