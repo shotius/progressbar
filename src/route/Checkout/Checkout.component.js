@@ -1,12 +1,13 @@
 import { Checkout as SourceCheckout } from 'SourceRoute/Checkout/Checkout.component';
 import { ContentWrapper } from 'SourceComponent/ContentWrapper/ContentWrapper.component';
-import "./Checkout.extension.style"
+import './Checkout.extension.style';
+import MultistepProgressBar from 'src/components/MultistepProgressBar/MultistepProgressBar.component';
 
 class Checkout extends SourceCheckout {
   render() {
     return (
       <main block="Checkout">
-      <h1 className='progress-bar'>Progress bar</h1>
+        <MultistepProgressBar steps={3} stepsDone={1} />
         <ContentWrapper
           wrapperMix={{ block: 'Checkout', elem: 'Wrapper' }}
           label={__('Checkout page')}
